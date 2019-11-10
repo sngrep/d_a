@@ -1,0 +1,28 @@
+{% extends 'mainland/base.html' %}
+
+{% block content %}
+  <article class="">
+    {% for question in question_list %}
+      <div class="">
+        {{ question.question }}
+      </div>
+    {% endfor %}
+  </article>
+  <button type="button" name="button"><a class="btn" href="{% url 'mainland:q_create' %}">Create</a></button>
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+
+      <span class="current">
+        Page {% page_obj.number %} of {% page_obj.num_pages %}.
+      </span>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page.obj.next_page_number }}">Next</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock %}

@@ -2,17 +2,36 @@
 
 {% block content %}
   {% if error_message %}<p> <strong>{{ error_message }}</strong></p>{% endif %}
-  {% for question in question_list %}
-    <form action="{% url 'quiz:get_selected_choices' question.pk %}" method="post">
-      <h2>{{ question.question }}</h2>
-      {% csrf_token %}
-            {% for choice in question.answer_set.all %}
-            <div>
-              <input type="checkbox" id="choices" name="choices" value="{{ choice.id }}">
-              <label for="{{ choice.id }}">{{ choice.answer }}</label>
-            </div>
-            {% endfor %}
-    <input class="btn btn-outline-success" type="submit" value="submit">
+    <form id="{{ question_list }}" action="{% url 'quiz:get_raw_answers' %}" method="post">
+      {% for question in question_list %}
+        <h2>{{ question.question }}</h2>
+        {% csrf_token %}
+        {% for choice in question.answer_set.all %}
+          <div>
+            <input type="checkbox" id="question_id_{{ question.id }}" name="question_pk|{{ question.pk }}" value="{{ choice.id }}">
+            <label for="{{ choice.id }}">{{ choice.answer }}</label>
+          </div>
+        {% endfor %}
+      {% endfor %}
     </form>
-  {% endfor %}
+    <div class="pagination">
+      <span class="step-links">
+        {% if paginator.num_pages <= 1 %}
+
+        {% else %}
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          {% endif %}
+
+          <span class="current">
+            Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+          {% endif %}
+        {% endif %}
+      </span>
+    </div>
+  <input class="btn btn-outline-success" type="submit" value="Завершить тест" form="{{ question_list }}" style="float: right;">
 {% endblock content %}

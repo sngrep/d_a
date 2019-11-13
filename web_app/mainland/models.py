@@ -4,7 +4,7 @@ from django_random_queryset import RandomManager
 
 class QCollection(models.Model):
     name = models.CharField(max_length=50)
-    amount_of_questions_per_session = models.DecimalField(max_digits=3, decimal_places=2)
+    amount_of_questions_per_session = models.IntegerField(default=5)
 
     def __str__(self):
         return self.name

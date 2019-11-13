@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'mainland',
     'users',
-    'quiz',
+    'quiz.apps.QuizConfig',
     # 'django-random-queryset',
 ]
 

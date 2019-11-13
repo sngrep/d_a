@@ -1,7 +1,13 @@
 {% extends 'mainland/base.html' %}
 
 {% block content %}
-  {% for choice in choices %}
-    <p>{{ choice }}</p>
-  {% endfor %}
+  <div class="">
+    <p><strong>Поздравляю!</strong></p>
+    <p>Вы завершили тест.</p>
+    <p><strong>Ваш результат - {{ context_corrects.0 }} из {{ context_corrects.1 }}</strong></p>
+    <br>
+    <p>Эта попытка прохождения тест была занесена в базу данных для предоставления наставнику более детальной информации.</p>
+    <br>
+    <a class="btn btn-outline-info" href="{% url 'homepage' %}" style="float: center;">Вернуться на домашнюю страницу</a>
+  </div>
 {% endblock content%}

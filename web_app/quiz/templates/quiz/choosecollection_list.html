@@ -1,0 +1,35 @@
+{% extends 'mainland/base.html' %}
+
+{% block content %}
+  <article class="">
+    {% for collection in qcollection_list %}
+      <div class="">
+        {{ collection.name }}
+        <a class="btn btn-outline-info" href="{% url 'quiz:quiz_start' pk=collection.pk %}" style="float: right;">Пройти тест</a>
+
+      </div>
+      <div>
+
+      </div>
+    {% endfor %}
+  </article>
+  <div class="pagination">
+    <span class="step-links">
+      {% if paginator.num_pages <= 1 %}
+
+      {% else %}
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current">
+          Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+      {% endif %}
+    </span>
+  </div>
+{% endblock content %}

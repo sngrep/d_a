@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css %}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'mainland/main.css' %}">
 
@@ -30,7 +31,8 @@
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'homepage' %}">Домашняя страница</a>
               <a class="nav-item nav-link" href="{% url 'mainland:qc_list' %}">Коллекции вопросов</a>
-              
+              <a class="nav-item nav-link" href="{% url 'quiz:choose_collection' %}">Пройти тест</a>
+
               <a class="nav-item nav-link" href="#">О проекте</a>
             </div>
             <!-- Navbar Right Side -->

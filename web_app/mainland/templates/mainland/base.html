@@ -29,7 +29,9 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="{% url 'homepage' %}">Домашняя страница</a>
+              {% if perms.mainland.view_qcollection %}
               <a class="nav-item nav-link" href="{% url 'mainland:qc_list' %}">Коллекции вопросов</a>
+              {% endif %}
               <a class="nav-item nav-link" href="{% url 'quiz:choose_collection' %}">Пройти тест</a>
 
               <a class="nav-item nav-link" href="#">О проекте</a>

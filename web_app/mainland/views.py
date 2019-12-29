@@ -6,6 +6,7 @@ from django.views.generic import (
                                  TemplateView
                                  )
 from .models import QCollection, Question, Answer
+from django.contrib.auth.decorators import permission_required
 
 
 class QcollectionCreateView(CreateView):
@@ -14,6 +15,7 @@ class QcollectionCreateView(CreateView):
     fields = ['name']
 
 
+@permission_required('qcollection.can_view_q_collection')
 class QcollectionListView(ListView):
     model = QCollection
     queryset = QCollection.objects.all()

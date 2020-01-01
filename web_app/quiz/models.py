@@ -16,6 +16,3 @@ class Choices(models.Model):
     related_attempt = models.ForeignKey(Attempt, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
     answer_true = models.BooleanField()
-
-    def __str__(self):
-        return self.answer_true

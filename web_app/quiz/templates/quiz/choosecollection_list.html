@@ -1,15 +1,14 @@
 {% extends 'mainland/base.html' %}
 
 {% block content %}
+  <p>
+      После нажатия кнопки "Пройти тест", тест будет запущен сразу и пойдет отсчет времени прохождения, нажимайте кнопки внимательно.
+  </p>
   <article class="">
     {% for collection in qcollection_list %}
       <div class="">
         {{ collection.name }}
         <a class="btn btn-outline-info" href="{% url 'quiz:quiz_start' pk=collection.pk %}" style="float: right;">Пройти тест</a>
-
-      </div>
-      <div>
-
       </div>
     {% endfor %}
   </article>

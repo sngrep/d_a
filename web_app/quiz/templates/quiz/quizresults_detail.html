@@ -10,16 +10,20 @@
     <br>
     <a class="btn btn-outline-info" href="{% url 'homepage' %}" style="float: center;">Вернуться на домашнюю страницу</a>
   </div>
+  <p>
+  {% if context_corrects.2 %}
   <div class="">
-      <button class="btn btn-info" type="button" name="incorrects" data-toggle="incorrects" data-target="#collapseIncorrects" aria-expanded="false" aria-controls="collapseIncorrects">Показать Вопросы, в которых допущены ошибки</button>
+      <button class="btn btn-outline-danger" type="button" name="incorrects" data-toggle="incorrects" data-target="#collapseIncorrects" aria-expanded="false" aria-controls="collapseIncorrects">Показать Вопросы, в которых допущены ошибки</button>
       <div class="collapse" id="collapseIncorrects">
           <div class="card card-body">
-              {% if context_corrects.3 %}
-                {% for question in context_corrects.3 %}
+              <ul>
+                {% for question in context_corrects.2 %}
                     <li>{{ question }}</li>
                 {% endfor %}
-              {% endif %}
+              </ul>
           </div>
       </div>
   </div>
+  {% endif %}
+  </p>
 {% endblock content%}

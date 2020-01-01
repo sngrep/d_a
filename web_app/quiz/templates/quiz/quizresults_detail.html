@@ -11,10 +11,15 @@
     <a class="btn btn-outline-info" href="{% url 'homepage' %}" style="float: center;">Вернуться на домашнюю страницу</a>
   </div>
   <div class="">
-      {% if context_corrects.3 %}
-        {% for question in context_corrects.3 %}
-            <p>{{ question }}</p>
-        {% endfor %}
-      {% endif %}
+      <button class="btn btn-info" type="button" name="incorrects" data-toggle="incorrects" data-target="#collapseIncorrects" aria-expanded="false" aria-controls="collapseIncorrects">Показать Вопросы, в которых допущены ошибки</button>
+      <div class="collapse" id="collapseIncorrects">
+          <div class="card card-body">
+              {% if context_corrects.3 %}
+                {% for question in context_corrects.3 %}
+                    <li>{{ question }}</li>
+                {% endfor %}
+              {% endif %}
+          </div>
+      </div>
   </div>
 {% endblock content%}

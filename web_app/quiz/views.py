@@ -54,11 +54,11 @@ def get_selected_choices(request, raw_dict):
     attempt_set.save()
     corrects_count = 0
 
+    incorrects = []
     for quest in raw_dict:
         question = get_object_or_404(Question, pk=quest)
 
         corrects = []
-        incorrects = []
         for answer_check in question.answer_set.all():
             if answer_check.correct is True:
                 corrects.append(str(answer_check.id))
@@ -78,4 +78,7 @@ def get_selected_choices(request, raw_dict):
         except ValueError:
             print(choice_form)
 
-    return [corrects_count, question.related_qcollection.amount_of_questions_per_session, incorrects]
+    return [corrects_count,
+            question.related_qcollection.amount_of_questions_per_session,
+            incorrects
+            ]

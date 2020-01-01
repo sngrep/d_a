@@ -10,4 +10,11 @@
     <br>
     <a class="btn btn-outline-info" href="{% url 'homepage' %}" style="float: center;">Вернуться на домашнюю страницу</a>
   </div>
+  <div class="">
+      {% if context_corrects.3 %}
+        {% for question in context_corrects.3 %}
+            <p>{{ question }}</p>
+        {% endfor %}
+      {% endif %}
+  </div>
 {% endblock content%}

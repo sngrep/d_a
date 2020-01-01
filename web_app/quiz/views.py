@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from mainland.models import Question, QCollection
 from django.views import generic
-from django.contrib import messages
 from .forms import ChoicesForm, AttemptForm
 from quiz.models import Attempt
 import string
@@ -59,6 +58,7 @@ def get_selected_choices(request, raw_dict):
         question = get_object_or_404(Question, pk=quest)
 
         corrects = []
+        incorrects = []
         for answer_check in question.answer_set.all():
             if answer_check.correct is True:
                 corrects.append(str(answer_check.id))
@@ -72,9 +72,10 @@ def get_selected_choices(request, raw_dict):
             corrects_count += 1
         else:
             choice_form.answer_true = False
+            incorrects.append(question)
         try:
             choice_form.save()
         except ValueError:
             print(choice_form)
 
-    return [corrects_count, question.related_qcollection.amount_of_questions_per_session]
+    return [corrects_count, question.related_qcollection.amount_of_questions_per_session, incorrects]

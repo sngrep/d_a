@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'web_app',
     'crispy_forms',
     'mainland',
     'users',
     'quiz.apps.QuizConfig',
     # 'django-random-queryset',
+    'guardian',
 ]
 
 MIDDLEWARE = [

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mainland',
     'users',
     'quiz.apps.QuizConfig',
+    'administration.apps.AdministrationConfig',
     # 'django-random-queryset',
     'guardian',
 ]

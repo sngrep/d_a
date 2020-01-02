@@ -1,0 +1,15 @@
+{% extends 'mainland/base.html' %}
+
+{% block content %}
+
+<div class="">
+    <ul>
+    {% for group in object_list %}
+        <li>{{ group }}</li>
+    {% empty %}
+        <p>No groups found!</p>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}

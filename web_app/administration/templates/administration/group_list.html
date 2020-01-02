@@ -5,7 +5,18 @@
 <div class="">
     <ul>
     {% for group in object_list %}
-        <li>{{ group }}</li>
+        <li>
+            <a class="btn btn-info" data-toggle="collapse" href="#collapseGroupPermissions" role="button" aria-expanded="true" aria-controls="collapseGroupPermissions">
+            {{ group }}
+            </a>
+            <div class="collapse" id="collapseGroupPermissions">
+                {% for permission in group.permissions.all %}
+                    <p>{{ permission }}</p>
+                {% empty %}
+                    <p>No permissions found!</p>
+                {% endfor %}
+            </div>
+        </li>
     {% empty %}
         <p>No groups found!</p>
     {% endfor %}

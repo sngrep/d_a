@@ -17,3 +17,4 @@ class UserView(ListView):
 class GroupView(ListView):
     model = Group
     paginate_by = 10
+    template_name = 'administration/group_list.html'

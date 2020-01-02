@@ -6,6 +6,15 @@ class QCollection(models.Model):
     name = models.CharField(max_length=50)
     amount_of_questions_per_session = models.IntegerField(default=5)
 
+    class Meta:
+        permissions = (
+        ('view_quiz', 'View the collection'),
+        ('edit_quiz', 'Edit the collection'),
+        ('add_quiz', 'Add the collection'),
+        ('delete_quiz', 'Delete the collection'),
+
+        )
+
     def __str__(self):
         return self.name
 

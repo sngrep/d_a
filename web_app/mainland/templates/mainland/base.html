@@ -59,7 +59,9 @@
               </div>
             {% endfor %}
           {% endif %}
-          {% block content %}{% endblock %}
+          {% block content %}
+          {% load guardian_tags %}
+          {% endblock %}
         </div>
         <!-- <div class="col-md-4">
           <div class="content-section">

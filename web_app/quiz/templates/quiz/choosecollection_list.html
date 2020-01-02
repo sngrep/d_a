@@ -6,10 +6,10 @@
   </div>
   <article class="">
     {% for collection in qcollection_list %}
-      <div class="">
+        <div class="">
         {{ collection.name }}
         <a class="btn btn-outline-info" href="{% url 'quiz:quiz_start' pk=collection.pk %}" style="float: right;">Пройти тест</a>
-      </div>
+        </div>
     {% endfor %}
   </article>
   <div class="pagination">

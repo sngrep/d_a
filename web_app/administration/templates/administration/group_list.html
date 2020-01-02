@@ -11,7 +11,7 @@
             </a>
             <div class="collapse" id="collapseGroupPermissions">
                 {% for permission in group.permissions.all %}
-                    <p>{{ permission }}</p>
+                    <p>{{ permission.name }}</p>
                 {% empty %}
                     <p>No permissions found!</p>
                 {% endfor %}

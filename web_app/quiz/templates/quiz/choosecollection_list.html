@@ -9,7 +9,7 @@
 
       {% for collection in qcollection_list %}
         {% get_obj_perms request.user for collection as "collection_access" %}
-        {% if "quiz_view" in collection_access %}
+        {% if "view_quiz" in collection_access %}
             <div class="">
             {{ collection.name }}
             <a class="btn btn-outline-info" href="{% url 'quiz:quiz_start' pk=collection.pk %}" style="float: right;">Пройти тест</a>

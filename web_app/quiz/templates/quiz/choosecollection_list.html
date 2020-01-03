@@ -5,12 +5,17 @@
       После нажатия кнопки "Пройти тест", тест будет запущен сразу и пойдет отсчет времени прохождения, нажимайте кнопки внимательно.
   </div>
   <article class="">
-    {% for collection in qcollection_list %}
-        <div class="">
-        {{ collection.name }}
-        <a class="btn btn-outline-info" href="{% url 'quiz:quiz_start' pk=collection.pk %}" style="float: right;">Пройти тест</a>
-        </div>
-    {% endfor %}
+
+      {% for collection in qcollection_list %}
+        {% get_obj_perms request.user for collection as "collection_access" %}
+        {% if "quiz_view" in collection_access %}
+            <div class="">
+            {{ collection.name }}
+            <a class="btn btn-outline-info" href="{% url 'quiz:quiz_start' pk=collection.pk %}" style="float: right;">Пройти тест</a>
+            </div>
+        {% else %}
+        {% endif %}
+      {% endfor %}
   </article>
   <div class="pagination">
     <span class="step-links">

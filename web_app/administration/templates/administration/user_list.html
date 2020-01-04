@@ -5,7 +5,18 @@
     <div class="">
         <ul>
         {% for user in object_list %}
-            <li>{{ user }}</li>
+            <li><button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapse{{ user }}Groups" aria-expanded="true" aria-controls="collapse{{ user }}Groups">{{ user }}</button></li>
+            <div class="collapse" id="collapse{{ user }}Groups">
+                <div class="card card-body">
+                    <ul>
+                        {% for group in user.groups.all %}
+                            <li>{{ group.name }}</li>
+                        {% empty %}
+                            <li>Этот пользователь не состоит в группах.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         {% empty %}
             <p>No users found!</p>
         {% endfor %}

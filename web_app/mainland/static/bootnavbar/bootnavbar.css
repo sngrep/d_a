@@ -16,7 +16,7 @@
 
 .dropdown-menu > li a:hover,
 .dropdown-menu > li.show {
-	background: #2e303d;
+	background: #3a3d4d;
 	color: white;
 }
 .dropdown-menu > li.show > a{

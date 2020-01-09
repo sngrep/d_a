@@ -11,7 +11,7 @@ from .models import QCollection, Question, Answer
 class QcollectionCreateView(CreateView):
     model = QCollection
     template_name = 'mainland/qcollection_create.html'
-    fields = ['name']
+    fields = ['name', 'amount_of_questions_per_session']
 
 
 class QcollectionListView(ListView):

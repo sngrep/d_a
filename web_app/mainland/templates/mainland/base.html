@@ -34,7 +34,8 @@
             <a class="nav-item nav-link" href="{% url 'quiz:choose_collection' %}">Пройти тест</a>
             {% load has_group %}
             {% if request.user|has_group:"ADMIN_GROUP" %}
-              <a class="nav-item nav-link" href="#" data-toggle="dropdown">Администрирование</a>
+              <a class="nav-item nav-link" href="#">Администрирование</a>
+              <a class="nav-item nav-link" href="{% url 'mainland:qc_create' %}">Create Collections</a>
             {% endif %}
             <a class="nav-item nav-link" href="/about">О проекте</a>
           </div>

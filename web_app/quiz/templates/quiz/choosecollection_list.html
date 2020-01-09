@@ -5,12 +5,12 @@
   <div class="card card-body">
       После нажатия кнопки "Пройти тест", тест будет запущен сразу и пойдет отсчет времени прохождения, нажимайте кнопки внимательно.
   </div>
-  <article class="">
+  <article class="card card-body" style="margin-top: 20px;">
 
       {% for collection in qcollection_list %}
         {% get_obj_perms request.user for collection as "collection_access" %}
         {% if "view_quiz" in collection_access %}
-            <div class="" style="margin-top: 5px;">
+            <div class="" style="margin-top: 10px;">
             {{ collection.name }}
             <a class="btn btn-outline-info" href="{% url 'quiz:quiz_start' pk=collection.pk %}" style="float: right;">Пройти тест</a>
             </div>

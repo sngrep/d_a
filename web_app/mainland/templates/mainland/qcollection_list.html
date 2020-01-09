@@ -1,11 +1,12 @@
 {% extends 'mainland/base.html' %}
 
 {% block content %}
-  <article class="">
+  <article class="card card-body">
     {% for collection in qcollection_list %}
       <div class="">
         {{ collection.name }}
       </div>
+      <a class="btn btn-outline-info" href="{% url 'mainland:q_create' %}">Добавить вопрос</a>
     {% endfor %}
   </article>
   <div class="pagination">
@@ -27,8 +28,6 @@
       {% endif %}
     </span>
   </div>
-  <div>
-    <a class="btn btn-outline-info" href="{% url 'mainland:q_create' %}">Create</a>
-    <a class="btn btn-outline-success" href="{% url 'mainland:qc_create' %}">Create</a>
-  </div>
+
+  <a class="btn btn-outline-success" href="{% url 'mainland:qc_create' %}">Создать коллекцию</a>
 {% endblock content %}

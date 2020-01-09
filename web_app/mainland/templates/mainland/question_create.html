@@ -1,17 +1,18 @@
 {% extends 'mainland/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
+<div class="container card card-body">
   <form class="" action="#" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
     <div class="container">
-      <input class="btn btn-info" type="submit" name="submit">
+      <input class="btn btn-outline-success" type="submit" name="submit">
     </div>
   </form>
 </div>
-<div class="">
-  <button class="btn btn-alert"><a href="{% url 'mainland:q_list' %}">See the list</a></button>
+<div style="margin-top: 10px;">
+  <a class="btn btn-outline-info" href="{% url 'mainland:q_list' %}">Посмотреть список вопросов</a>
 </div>
 
 

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from users import views as user_views
-from mainland.views import HomeView
+from mainland.views import HomeView, AboutView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='homepage'),
@@ -18,6 +18,7 @@ urlpatterns = [
         name='logout'
         ),
     path('profile/', user_views.profile, name='profile'),
+    path('about/', AboutView.as_view(), name='about_page'),
     path('admin/', admin.site.urls),
     path('quest/', include('mainland.urls')),
     path('quiz/', include('quiz.urls')),

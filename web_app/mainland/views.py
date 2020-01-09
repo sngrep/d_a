@@ -49,3 +49,7 @@ class QuestionDeleteView(DeleteView):
 
 class HomeView(TemplateView):
     template_name = 'mainland/home_view.html'
+
+
+class AboutView(TemplateView):
+    template_name = 'mainland/about_view.html'

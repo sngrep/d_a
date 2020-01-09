@@ -36,7 +36,7 @@
             {% if request.user|has_group:"ADMIN_GROUP" %}
               <a class="nav-item nav-link" href="{% url 'administration:admin_page_view' %}">Администрирование</a>
             {% endif %}
-            <a class="nav-item nav-link" href="/about">О проекте</a>
+            <a class="nav-item nav-link" href="{% url 'about_page' %}">О проекте</a>
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">

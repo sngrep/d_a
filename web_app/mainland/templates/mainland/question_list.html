@@ -8,7 +8,7 @@
       </div>
     {% endfor %}
   </article>
-  <button type="button btn-outline-success" style="margin-top: 10px;" name="button"><a class="btn" href="{% url 'mainland:q_create' %}">Создать еще вопрос</a></button>
+  <button type="btn btn-outline-success" style="margin-top: 10px;" name="button"><a class="btn" href="{% url 'mainland:q_create' %}">Создать еще вопрос</a></button>
   <div class="pagination">
     <span class="step-links">
       {% if page_obj.has_previous %}

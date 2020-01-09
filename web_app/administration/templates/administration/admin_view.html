@@ -1,0 +1,17 @@
+{% extends 'mainland/base.html' %}
+
+{% block content %}
+
+    <div class="admin_page_style">
+        <ul>
+            <li><a href="{% url 'mainland:qc_list' %}">Collections</a></li>
+            <li><a href="#">Users/Groups</a>
+                <ul>
+                    <li><a href="{% url 'administration:user_list' %}">Users</a></li>
+                    <li><a href="{% url 'administration:group_list' %}">Groups</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}

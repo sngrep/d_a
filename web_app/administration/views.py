@@ -4,8 +4,13 @@ from django.views.generic import (ListView,
                                   DetailView,
                                   CreateView,
                                   UpdateView,
-                                  DeleteView
+                                  DeleteView,
+                                  TemplateView
                                   )
+
+
+class AdminView(TemplateView):
+    template_name = 'administration/admin_view.html'
 
 
 class UserView(ListView):

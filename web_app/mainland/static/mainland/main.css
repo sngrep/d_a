@@ -82,33 +82,3 @@ a.article-title:hover {
 .account-heading {
   font-size: 2.5rem;
 }
-
-body {
-    background-image: url();
-}
-header{
-    margin-top: 200px;
-    font-family: Arial;
-}
-.dws-menu *{
-    margin: 0;
-    padding: 0;
-}
-.dws-menu ul,
-.dws-menu ol{
-    list-style: none;
-}
-.dws-menu > ul{
-    display: flex;
-    justify-content: center;
-}
-.dws-menu > ul li a{
-    display: block;
-    background: #ececed;
-    padding: 15px 30px 15px 40px;
-    font-size: 14px;
-    color: #454547;
-    text-decoration: none;
-
-    transition: all 0.3s ease;
-}

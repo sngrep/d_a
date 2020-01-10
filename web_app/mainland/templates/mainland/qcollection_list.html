@@ -11,9 +11,7 @@
   </article>
   <div class="pagination">
     <span class="step-links">
-      {% if paginator.num_pages <= 1 %}
-
-      {% else %}
+      {% if paginator.num_pages > 1 %}
         {% if page_obj.has_previous %}
           <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
         {% endif %}

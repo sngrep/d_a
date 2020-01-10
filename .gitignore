@@ -2,3 +2,8 @@ venv/
 web_app/db.sqlite3
 __pycache__/
 migrations/
+pyvenv.cfg
+bin/
+lib/
+lib64/
+share/

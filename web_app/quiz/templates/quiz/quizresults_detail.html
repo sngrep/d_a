@@ -4,26 +4,32 @@
   <div class="">
     <p><strong>Поздравляю!</strong></p>
     <p>Вы завершили тест.</p>
-    <p><strong>Ваш результат - {{ context_corrects.0 }} из {{ context_corrects.1 }}</strong></p>
+    <p><strong>Ваш результат - {{ corrects_count }} из {{ questions_count }}</strong></p>
     <br>
     <p>Эта попытка прохождения тест была занесена в базу данных для предоставления наставнику более детальной информации.</p>
     <br>
     <a class="btn btn-outline-info" href="{% url 'homepage' %}" style="float: center;">Вернуться на домашнюю страницу</a>
   </div>
   <p>
-  {% if context_corrects.2 %}
+  {% if incorrects_list %}
   <div class="">
-      <button class="btn btn-outline-danger" type="button" name="collapse" data-toggle="incorrects" data-target="#collapseIncorrects" aria-expanded="false" aria-controls="collapseIncorrects">Показать Вопросы, в которых допущены ошибки</button>
-      <div class="collapse" id="collapseIncorrects">
+      <button class="btn btn-outline-danger" type="button" name="collapse" data-toggle="collapse" data-target="#collapseIncorrects" aria-expanded="false" aria-controls="collapseIncorrects">Показать Вопросы, в которых допущены ошибки</button>
+      <div class="collapse mt-2" id="collapseIncorrects">
           <div class="card card-body">
-              <ul>
-                {% for question in context_corrects.2 %}
-                    <li>{{ question }}</li>
+
+                {% for question in incorrects_list %}
+                    <p>{{ question }}</p>
+                    <ul>
+
+                    </ul>
                 {% endfor %}
-              </ul>
+
           </div>
       </div>
   </div>
   {% endif %}
   </p>
+
+    {{ quests_cache }}
+
 {% endblock content%}

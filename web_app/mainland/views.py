@@ -5,12 +5,14 @@ from django.views.generic import (
                                  DeleteView,
                                  TemplateView
                                  )
+from django.urls import reverse_lazy, reverse
 from .models import QCollection, Question, Answer
 
 
 class QcollectionCreateView(CreateView):
     model = QCollection
     template_name = 'mainland/qcollection_create.html'
+    success_url = reverse_lazy('mainland:qc_list')
     fields = ['name', 'amount_of_questions_per_session']
 
 

@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-from mainland.models import Question, QCollection
+from mainland.models import Question, QCollection, Answer
+from django.core.cache import cache
 from django.views import generic
-from .forms import ChoicesForm, AttemptForm
 from quiz.models import Attempt
 import string
-import random
+import secrets
 
 
 class ChooseCollectionView(generic.ListView):
@@ -20,9 +20,19 @@ class QuizStartView(generic.ListView):
 
     def get_queryset(self, **kwargs):
         qc_pk = self.kwargs.get('pk')
+        quests_list = dict()
         queryset = Question.objects.filter(related_qcollection=qc_pk)
-        print(QCollection.objects.get(pk=qc_pk).amount_of_questions_per_session)
-        return queryset.random(QCollection.objects.get(pk=qc_pk).amount_of_questions_per_session)
+        quests_list['count'] = QCollection.objects.get(pk=qc_pk).amount_of_questions_per_session
+        queryset_data = queryset.random(quests_list['count'])
+        uid = secrets.token_hex(16)
+        self.request.session['question_session_id'] = uid
+
+        tmp_list = list()
+        for question in queryset_data:
+            tmp_list.append(question.id)
+        quests_list['questions'] = tmp_list
+        cache.set(uid, quests_list)
+        return queryset_data
 
 
 class QuizResultsDetail(generic.DetailView):
@@ -30,55 +40,64 @@ class QuizResultsDetail(generic.DetailView):
     template_name = 'quiz/quizresults_detail.html'
 
 
-def get_raw_answers(request, **kwargs):
+def get_raw_answers(request):
     raw_dict = {}
     for objkey in request.POST:
-        if 'question_pk|' in objkey:
-            tmp = objkey.strip('question_pk|')
-            raw_dict[int(tmp)] = request.POST.getlist(objkey)
-    context_corrects = get_selected_choices(request, raw_dict)
+        if 'question_pk=' in objkey:
+            tmp = objkey.strip('question_pk=')
+            temp_val_list = list()
+            for value in request.POST.getlist(objkey):
+                temp_val_list.append(int(value))
+            raw_dict[int(tmp)] = temp_val_list
+    quests_from_get = get_quests_cached(request)
+    context_corrects = compare_answers(quests_from_get['questions'], raw_dict)
     return render(
                 request,
                 'quiz/quizresults_detail.html',
-                context={'choices': None, 'context_corrects': context_corrects}
+                context={'choices': None,
+                         'context_corrects': context_corrects,
+                         'corrects_count': context_corrects['corrects_count'],
+                         'incorrects_list': context_corrects['incorrects'],
+                         'quests_cache': quests_from_get,
+                         'questions_count': quests_from_get['count'],
+                         }
                 )
 
 
-def get_selected_choices(request, raw_dict):
-    attempt_set = AttemptForm()
-    attempt_set = attempt_set.save(commit=False)
-    attempt_set.username = request.user
-    l_a_d = string.ascii_letters + string.digits
-    attempt_set.name = f"{request.user}_{''.join(random.choice(l_a_d) for i in range(10))}"
-    attemp_name = attempt_set.name
-    attempt_set.save()
+def get_quests_cached(request):
+    try:
+        uid = request.session['question_session_id']
+        qfg = cache.get(uid)
+        cache.delete(uid)
+        del request.session['question_session_id']
+        return qfg
+    except KeyError:
+        raise TimeoutError('Timeout! Get out!')
+
+
+def compare_answers(questions, raw_dict):
     corrects_count = 0
-
     incorrects = []
-    for quest in raw_dict:
-        question = get_object_or_404(Question, pk=quest)
-
-        corrects = []
-        for answer_check in question.answer_set.all():
-            if answer_check.correct is True:
-                corrects.append(str(answer_check.id))
-
-        choice_form = ChoicesForm()
-        choice_form = choice_form.save(commit=False)
-        choice_form.related_attempt = Attempt.objects.get(name=attemp_name)
-        choice_form.question = question
-        if corrects == raw_dict[quest]:
-            choice_form.answer_true = True
+    corrects = get_corrects(questions)
+    for key in corrects:
+        if set(corrects[key]) == set(raw_dict[key]):
             corrects_count += 1
         else:
-            choice_form.answer_true = False
-            incorrects.append(question)
-        try:
-            choice_form.save()
-        except ValueError:
-            print(choice_form)
+            incorrects.append(get_object_or_404(Question, id=key))
 
-    return [corrects_count,
-            question.related_qcollection.amount_of_questions_per_session,
-            incorrects
-            ]
+    return {'corrects_count': corrects_count,
+            'incorrects': incorrects,
+            }
+
+
+def get_corrects(question_list):
+    corrects = dict()
+    for question_id in question_list:
+        question = Question.objects.get(id=question_id)
+        tmp_corrects = list()
+        for answer in question.answer_set.all():
+            if answer.correct:
+                tmp_corrects.append(answer.id)
+            corrects[question_id] = tmp_corrects
+    print(f"CORRECTS!! {corrects}")
+    return corrects

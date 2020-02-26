@@ -8,7 +8,7 @@
         {% csrf_token %}
         {% for choice in question.answer_set.all %}
           <div>
-            <input type="checkbox" id="question_id_{{ question.id }}" name="question_pk|{{ question.pk }}" value="{{ choice.id }}">
+            <input type="checkbox" id="question_id_{{ question.id }}" name="question_pk={{ question.pk }}" value="{{ choice.id }}">
             <label for="{{ choice.id }}">{{ choice.answer }}</label>
           </div>
         {% endfor %}

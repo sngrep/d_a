@@ -1,25 +1,50 @@
 {% extends 'mainland/base.html' %}
 
 {% block content %}
-<div class="">
-    <ul>
-    {% for group in object_list %}
-        <li>
-            <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#collapseGroupPermissions" role="button" aria-expanded="true" aria-controls="collapseGroupPermissions">
-            {{ group }}
-            </a>
-            <div class="collapse" id="collapseGroupPermissions">
-                {% for permission in group.permissions.all %}
-                    <p>{{ permission.name }}</p>
-                {% empty %}
-                    <p>No permissions found!</p>
-                {% endfor %}
-            </div>
-        </li>
-    {% empty %}
-        <p>No groups found!</p>
-    {% endfor %}
-    </ul>
+<a class="btn btn-outline-secondary mb-2" href="{% url 'administration:admin_page_view' %}">Назад</a>
+<hr>
+<div>
+    <p><h2>Список групп</h2></p>
+    <p class="mt-1">Нажмите на название группы чтобы посмотреть, какие тесты для группы разрешены.</p>
+    <a class="btn btn-outline-info mb-2" href="{% url 'administration:group_create' %}">Создать новую группу</a>
 </div>
+<div class="card card-body">
+    <div>
+        <ul>
+        {% for key,value in group_perms.items %}
+            {% if key.name == 'ADMIN_GROUP' %}
+                {% else %}
+            <li>
+                    <a class="btn btn-outline-primary btn-sm m-1" data-toggle="collapse" href="#collapse{{ key }}Permissions" role="button" aria-expanded="true" aria-controls="collapseGroupPermissions">
+                    {{ key }}
+                    </a>
+                    <div class="collapse" id="collapse{{ key }}Permissions">
+                        <div class="card card-group">
+                        <ul>
+                            {% for quiz in group_list %}
+                                <li>{{ quiz }}
+                                    <form method="post" action="#">
+                                        <a class="btn btn-sm btn-outline-success" href="{% url 'administration:give_permission' key.id quiz.id %}">Разрешить</a>
 
+                                        <a class="btn btn-sm btn-outline-danger" href="{% url 'administration:remove_permission' key.id quiz.id %}">Запретить</a>
+                                    </form>
+                                    {% if quiz in value %}
+                                        <h5>+</h5>
+                                    {% else %}
+                                        <h5>-</h5>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+                        </div>
+                    </div>
+                </li>
+        {% endif %}
+        {% empty %}
+            <p>No groups found!</p>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock content %}

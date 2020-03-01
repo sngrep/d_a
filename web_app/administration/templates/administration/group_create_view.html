@@ -1,0 +1,14 @@
+{% extends 'mainland/base.html' %}
+
+{% block content %}
+<a class="btn btn-outline-secondary mb-2" href="{% url 'administration:group_list' %}">Назад</a>
+<hr>
+<div class="container">
+    <p><h2>Форма создания новой группы</h2></p>
+    <form class="mt-1" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-outline-success" type="submit" name="submit">
+    </form>
+</div>
+{% endblock content %}

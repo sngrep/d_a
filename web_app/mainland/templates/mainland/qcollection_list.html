@@ -1,6 +1,8 @@
 {% extends 'mainland/base.html' %}
 
 {% block content %}
+<a class="btn btn-outline-secondary mb-2" href="{% url 'administration:admin_page_view' %}">Назад</a>
+<hr>
   <article class="card card-body">
     {% for collection in qcollection_list %}
       <div class="">

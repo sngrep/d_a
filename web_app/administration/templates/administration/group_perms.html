@@ -1,0 +1,13 @@
+{% extends 'mainland/base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="content-section">
+    <form id="quests_list" method="post" action="#">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-outline-success" form="quests_list" type="submit" name="submit">Сабмит</button>
+    </form>
+</div>
+
+{% endblock content %}

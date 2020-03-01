@@ -1,11 +1,15 @@
 {% extends 'mainland/base.html' %}
 
 {% block content %}
-
-    <div class="">
+<a class="btn btn-outline-secondary mb-2" href="{% url 'administration:admin_page_view' %}">Назад</a>
+<hr>
+<div>
+    <p><h2>Список пользователей</h2></p>
+</div>
+    <div class="content-section">
         <ul>
         {% for user in object_list %}
-            <li><button class="btn btn-outline-info btn-sm" type="button" data-toggle="collapse" data-target="#collapse{{ user }}Groups" aria-expanded="true" aria-controls="collapse{{ user }}Groups">{{ user }}</button></li>
+            <li><button class="btn btn-outline-info btn-sm m-1" type="button" data-toggle="collapse" data-target="#collapse{{ user }}Groups" aria-expanded="true" aria-controls="collapse{{ user }}Groups">{{ user }}</button></li>
             <div class="collapse" id="collapse{{ user }}Groups">
                 <div class="card card-body">
                     <ul>
@@ -14,6 +18,7 @@
                         {% empty %}
                             <li>Этот пользователь не состоит в группах.</li>
                         {% endfor %}
+                    <a class="btn btn-outline-primary mt-2" href="{% url 'administration:user-update' user.id %}">Редактировать принадлежность к группам</a>
                     </ul>
                 </div>
             </div>

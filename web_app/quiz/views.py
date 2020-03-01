@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from mainland.models import Question, QCollection, Answer
 from django.core.cache import cache
 from django.views import generic
-from quiz.models import Attempt
-import string
 import secrets
 
 

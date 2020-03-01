@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users',
     'quiz.apps.QuizConfig',
     'administration.apps.AdministrationConfig',
+    'rest_framework',
     # 'django-random-queryset',
     'guardian',
 ]
@@ -120,6 +121,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# RestAPI integration
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 
 # Internationalization

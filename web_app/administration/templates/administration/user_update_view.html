@@ -1,0 +1,14 @@
+{% extends 'mainland/base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<a class="btn btn-outline-secondary mb-2" href="{% url 'administration:user_list' %}">Назад</a>
+<p><h2>Обновить список групп пользователя</h2></p>
+<div class="content-section">
+    <form method="post" action="#">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-outline-success" type="submit" name="submit">
+    </form>
+</div>
+{% endblock content %}

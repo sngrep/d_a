@@ -1,17 +1,12 @@
 {% extends 'mainland/base.html' %}
 
 {% block content %}
-
+<h2>Панель администратора</h2>
+<div class="card card-body">
     <div class="admin_page_style">
-        <ul>
-            <li><a href="{% url 'mainland:qc_list' %}">Collections</a></li>
-            <li><a href="#">Users/Groups</a>
-                <ul>
-                    <li><a href="{% url 'administration:user_list' %}">Users</a></li>
-                    <li><a href="{% url 'administration:group_list' %}">Groups</a></li>
-                </ul>
-            </li>
-        </ul>
+        <p><a class="btn btn-block btn-outline-primary m-1" href="{% url 'mainland:qc_list' %}">Коллекции вопросов</a></p>
+        <p><a class="btn btn-block btn-outline-primary m-1" href="{% url 'administration:user_list' %}">Управление пользователями</a></p>
+        <p><a class="btn btn-block btn-outline-primary m-1" href="{% url 'administration:group_list' %}">Управление группами пользователей</a></p>
     </div>
-
-{% endblock %}
+</div>
+{% endblock content %}
